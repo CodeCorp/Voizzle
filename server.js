@@ -28,7 +28,18 @@ app.get(/\/(style|js)\/*/, function(req, res) {
 	res.sendFile(__dirname + parsedURL.pathname);
 });
 
+var playerCount = 1;
+var players = {};
+
 io.on('connection', function(socket) {
-	var address = socket.handshake.address;
-	console.log('connected to ' + address);
+	var address = socket.request.connection.remoteAddress;
+	if(!players[address]) {
+		players[address] = playerCount++;
+		console.log('Player #' + players[address] + ' added with ip ' + address);
+	}
+	socket.emit('initial connection', {colorCode : players[address]});
+
+	socket.on('spoken word', function(data) {
+		io.emit('spoken word', data);
+	});
 });

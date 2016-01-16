@@ -12,7 +12,7 @@ PUZZLE_ROWS[8] = "1234567890";
 PUZZLE_ROWS[9] = "1234567890";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
-var highlightColor;
+var myHighlightColor;
 
 function drawBoard(){
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
@@ -33,13 +33,13 @@ function generateColumns(argument) {
 	};
 }
 
-function searchWord(word) {
+function searchWord(word, highlightColor) {
 	if(word.length < MINIMUM_WORD_LENGTH) return; 
-	if(!rowSearch(word)) columnSearch(word);
+	if(!rowSearch(word, highlightColor)) columnSearch(word, highlightColor);
 }
 
 
-function rowSearch(word) {
+function rowSearch(word, highlightColor) {
 	var start_index;
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
 		start_index = PUZZLE_ROWS[i].indexOf(word);
@@ -53,7 +53,7 @@ function rowSearch(word) {
 	return false;	
 }
 
-function columnSearch(word) {
+function columnSearch(word, highlightColor) {
 	var start_index;
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
 		start_index = PUZZLE_COLUMNS[i].indexOf(word);
@@ -72,7 +72,7 @@ function scoreUpdate(player1Score,player2Score) {
 }
 
 function setHighlightColor(playerNo){
-	highlightColor = "highlight-" + playerNo;
+	myHighlightColor = "highlight-" + playerNo;
 }
 
 
@@ -109,7 +109,9 @@ if ('webkitSpeechRecognition' in window) {
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 			if (event.results[i].isFinal) {
 				finalTextMessage = event.results[i][0].transcript.toUpperCase().trim();				
-				searchWord(finalTextMessage);
+				socket.emit('spoken word', {'word': finalTextMessage,
+					'highlightColor': myHighlightColor
+					});
 				document.getElementById('voice-input').value = finalTextMessage;
 				interimText = '';
 			} else {
