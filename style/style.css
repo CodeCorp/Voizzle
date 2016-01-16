@@ -3,3 +3,30 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+#navbar{
+	
+}
+
+
+#puzzle-wrapper{
+	height: 402px; /*2px extra for border*/
+	width: 402px; /*2px extra for border*/
+	border: 1px solid black;
+	margin-top: 100px;
+}
+
+.pixel {
+	height: 40px;
+	width: 40px;
+	border: 1px solid white;
+	background-color: #e6e6e6;
+	float: left;
+}
+
+.puzzle-char{
+	font-family: sans-serif;
+	font-size: 24px;
+	vertical-align: middle;
+	text-align: center;
+}
