@@ -22,6 +22,8 @@ function drawBoard(){
 			$("#puzzle-wrapper").append("<div id='"+i+"-"+j+"' class='pixel'><p class='puzzle-char'>"+PUZZLE_ROWS[i][j]+"</p></div>");
 		};
 	};
+
+	setCurrentPlayer();
 }
 
 function generateColumns(argument) {
@@ -36,6 +38,7 @@ function generateColumns(argument) {
 
 function searchWord(word, highlightColor) {
 	var playerNo = highlightColor[highlightColor.length-1];
+	var newLogButton = $("<button type='button' class='btn log-button'>"+word+"</button>");
 	if(spokenWords.indexOf(word) > -1) return false;
 	if(word.length < MINIMUM_WORD_LENGTH) return false; 
 	if(rowSearch(word, highlightColor) || columnSearch(word, highlightColor)) {
@@ -44,6 +47,8 @@ function searchWord(word, highlightColor) {
 			case '1':scoreUpdate(++score1,score2); break;
 			case '2':scoreUpdate(score1,++score2);break;
 		}
+
+		$('#logs').append(newLogButton.addClass(highlightColor));
 		return true;
 	}
 }
@@ -84,13 +89,27 @@ function scoreUpdate(player1Score,player2Score) {
 
 function setHighlightColor(playerNo){
 	myHighlightColor = "highlight-" + playerNo;
+	setCurrentPlayer(playerNo);
 }
 
+function setCurrentPlayer(player){
+		$('#score-wrapper-'+player).addClass('score-wrapper-highlight');
+}
 
-$( document ).ready(function() {
+function newGame(argument) {
+	scoreUpdate(0,0);
+	spokenWords = [];
+	score1=0
+	score2=0;
+	$("#puzzle-wrapper").html("");
+	$("#logs").html("");
 	drawBoard();
 	generateColumns();
-	scoreUpdate(0,0)
+}
+
+$( document ).ready(function() {
+	newGame();
+
 });
 
 //--------------------------------------------------------

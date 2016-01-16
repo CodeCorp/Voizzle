@@ -34,6 +34,10 @@
 	padding: 0 !important;
 }
 
+.score-wrapper-highlight{
+	border: 2px solid white !important;
+}
+
 .score{
 	font-size: 28px;
 	font-family: sans-serif;
@@ -104,6 +108,33 @@
 
 #interim-wrapper{
 	margin-top: 10px;
+}
+
+#log-wrapper{
+	border-top: 1px solid black;
+	height: 500px;
+	width: 480px;
+	margin-top: 20px;
+	padding-top: 10px;
+}
+
+#log-header p{
+	font-family: sans-serif;
+	font-size: 24px;
+}
+
+.log-button{
+	float: left;
+	margin: 1px;
+	color: white;
+	font-family: sans-serif;
+	font-size: 18px !important;
+}
+
+#new-game-btn{
+	margin-top: 15px;
+	height: 50px;
+	width: 480px;
 }
 
 #timer{

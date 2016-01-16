@@ -20,8 +20,8 @@
 	          <a class="navbar-brand" href="#">Voizzle</a>
 	        </div>
 	        <div id="score-board">
-	        	<div class="btn btn-circle btn-warning score-wrapper"><span class="score" id="score-1">0</span></div>
-	        	<div class="btn btn-circle btn-success score-wrapper"><span class="score" id="score-2">10</span></div>
+	        	<div class="btn btn-circle btn-warning score-wrapper" id="score-wrapper-1"><span class="score" id="score-1">0</span></div>
+	        	<div class="btn btn-circle btn-success score-wrapper" id="score-wrapper-2"><span class="score" id="score-2">0</span></div>
 	        </div>
 	    </nav>		
 		<div class="container">
@@ -36,6 +36,17 @@
 				<div id="interim-wrapper">
 					<span>You're speaking : </span>
 					<span id="interim">- - - </span>
+				</div>
+				<div id="log-wrapper">
+					<div id="log-header"><p>LOGS :</p></div>
+					<div id="logs">
+					<!-- <button type="button" class="btn log-button highlight-1">TEST1</button> -->
+					<!-- <button type="button" class="btn log-button highlight-2">TEST2</button> -->
+					<!-- <button type="button" class="btn log-button highlight-1">TEST3</button> -->
+					</div>
+				</div>
+				<div id="new-game-wrapper">
+					<button type="button" class="btn btn-primary" id="new-game-btn" onclick="newGame()">New Game</button>
 				</div>
 			</div>
 			<div id="timer">
