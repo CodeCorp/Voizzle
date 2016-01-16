@@ -8,7 +8,7 @@ PUZZLE_ROWS[4] = "RNCDIHOLNG";
 PUZZLE_ROWS[5] = "OTJYOZWOMH";
 PUZZLE_ROWS[6] = "HKHINHLKOT";
 PUZZLE_ROWS[7] = "ALMYELLOWY";
-PUZZLE_ROWS[8] = "WNQPDEFSTI";
+PUZZLE_ROWS[8] = "NNQPDEFSTI";
 PUZZLE_ROWS[9] = "BSLJDHUOSK";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
@@ -60,7 +60,7 @@ function rowSearch(word, highlightColor) {
 		start_index = PUZZLE_ROWS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+i+"-"+(j+start_index)).addClass(highlightColor);
+				$("#"+i+"-"+(j+start_index)).removeClass().addClass(highlightColor).addClass('pixel');
 			};
 			return true;
 		};
@@ -74,7 +74,7 @@ function columnSearch(word, highlightColor) {
 		start_index = PUZZLE_COLUMNS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+(j+start_index)+"-"+i).addClass(highlightColor);
+				$("#"+(j+start_index)+"-"+i).removeClass().addClass(highlightColor).addClass('pixel');
 			};
 			return true;
 		};
