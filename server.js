@@ -15,6 +15,8 @@ httpsServer.listen(4000, function() {
 	console.log('listening on *:4000');
 });
 
+io.listen(httpsServer);
+
 app.get('/', function(req, res){
 	// res.send('<h1>Hello World</h1>');
 	res.sendFile(__dirname + '/index.html');
@@ -26,10 +28,7 @@ app.get(/\/(style|js)\/*/, function(req, res) {
 	res.sendFile(__dirname + parsedURL.pathname);
 });
 
-io.listen(httpsServer);
-
 io.on('connection', function(socket) {
-	console.log('connected bro');
 	var address = socket.handshake.address;
-	console.log('connected to ' + address.address + ':' + address.port);
+	console.log('connected to ' + address);
 });
