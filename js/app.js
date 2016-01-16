@@ -12,6 +12,7 @@ PUZZLE_ROWS[8] = "1234567890";
 PUZZLE_ROWS[9] = "1234567890";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
+var highlightColor;
 
 function drawBoard(){
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
@@ -44,7 +45,7 @@ function rowSearch(word) {
 		start_index = PUZZLE_ROWS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+i+"-"+(j+start_index)).addClass('highlighted');
+				$("#"+i+"-"+(j+start_index)).addClass(highlightColor);
 			};
 			return true;
 		};
@@ -58,12 +59,20 @@ function columnSearch(word) {
 		start_index = PUZZLE_COLUMNS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+(j+start_index)+"-"+i).addClass('highlighted');
+				$("#"+(j+start_index)+"-"+i).addClass(highlightColor);
 			};
 			return true;
 		};
 	};
 	return false;
+}
+
+function scoreUpdate(player1Score,player2Score) {
+	// body...
+}
+
+function setHighlightColor(playerNo){
+	highlightColor = "highlight-" + playerNo;
 }
 
 

@@ -73,8 +73,12 @@
 	text-align: center;
 }
 
-.highlighted{
+.highlight-1{
 	background-color: #f0ad4e;
+}
+
+.highlight-2{
+	background-color: #5cb85c;
 }
 
 #voice-input{
