@@ -19,19 +19,30 @@
 	        <div class="navbar-header">
 	          <a class="navbar-brand" href="#">Voizzle</a>
 	        </div>
-	        <div id="navbar" class="collapse navbar-collapse">
-	          
+	        <div id="score-board">
+	        	<div class="btn btn-circle btn-warning score-wrapper"><p class="score">5</p></div>
+	        	<div class="btn btn-circle btn-success score-wrapper"><p class="score">9</p></div>
 	        </div>
 	    </nav>		
 		<div class="container">
 			<div id="puzzle-wrapper">
 
 			</div>
-			<div id="input-wrapper">
-				<input type="text" class="" id="voice-input">
-				<button id="mic" type="button" class="btn btn-primary" onclick="toggleDictation()">Speak</button>
+			<div id="right-area-wrapper">
+				<div id="input-wrapper">
+					<input type="text" class="" id="voice-input">
+					<button id="mic" type="button" class="btn btn-primary" onclick="toggleDictation()">Speak</button>
+				</div>
+				<div id="interim-wrapper">
+					<span>You're speaking : </span>
+					<span id="interim">AAA</span>
+				</div>
 			</div>
-			<div id="interim"></div>
+			<div id="timer">
+			</div>
+		</div>
+		<div id="footer">
+			 <a id="footer-text" href="https://github.com/CodeCorp" target="_blank">Powered By CodeCorp</a>
 		</div>
 	</body>
 </html>
