@@ -1,0 +1,19 @@
+{
+  "name": "voizzle",
+  "version": "0.0.0",
+  "description": "The voice enabled word puzzle",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeCorp/Voizzle.git"
+  },
+  "author": "CodeCorp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodeCorp/Voizzle/issues"
+  },
+  "homepage": "https://github.com/CodeCorp/Voizzle#readme"
+}
