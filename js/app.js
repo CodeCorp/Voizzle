@@ -14,6 +14,7 @@ var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
 var myHighlightColor;
 var spokenWords = [];
+var score1=0, score2=0;
 
 function drawBoard(){
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
@@ -72,7 +73,8 @@ function columnSearch(word, highlightColor) {
 }
 
 function scoreUpdate(player1Score,player2Score) {
-	// body...
+	$('#score-1').html(player1Score);
+	$('#score-2').html(player2Score);
 }
 
 function setHighlightColor(playerNo){
@@ -83,6 +85,7 @@ function setHighlightColor(playerNo){
 $( document ).ready(function() {
 	drawBoard();
 	generateColumns();
+	scoreUpdate(0,0)
 });
 
 //--------------------------------------------------------
