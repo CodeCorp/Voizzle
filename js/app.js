@@ -1,15 +1,15 @@
 var PUZZLE_SIZE = 10;
 var PUZZLE_ROWS = [];
-PUZZLE_ROWS[0] = "QWERTYUIOP";
-PUZZLE_ROWS[1] = "DUCK567890";
-PUZZLE_ROWS[2] = "READP67890";
-PUZZLE_ROWS[3] = "1234O67890";
-PUZZLE_ROWS[4] = "1234W67890";
-PUZZLE_ROWS[5] = "1234E67890";
-PUZZLE_ROWS[6] = "1234R67890";
-PUZZLE_ROWS[7] = "1234567890";
-PUZZLE_ROWS[8] = "1234567890";
-PUZZLE_ROWS[9] = "1234567890";
+PUZZLE_ROWS[0] = "QWERTYIOPU";
+PUZZLE_ROWS[1] = "DUCKINGHEN";
+PUZZLE_ROWS[2] = "OPULKITEFA";
+PUZZLE_ROWS[3] = "GATELFGLAU";
+PUZZLE_ROWS[4] = "RNCDIHOLNG";
+PUZZLE_ROWS[5] = "OTJYOZWOMH";
+PUZZLE_ROWS[6] = "HKHINHLKOT";
+PUZZLE_ROWS[7] = "ALMYELLOWY";
+PUZZLE_ROWS[8] = "WNQPDEFSTI";
+PUZZLE_ROWS[9] = "BSLJDHUOSK";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
 var myHighlightColor;
@@ -35,10 +35,15 @@ function generateColumns(argument) {
 }
 
 function searchWord(word, highlightColor) {
+	var playerNo = highlightColor[highlightColor.length-1];
 	if(spokenWords.indexOf(word) > -1) return false;
 	if(word.length < MINIMUM_WORD_LENGTH) return false; 
 	if(rowSearch(word, highlightColor) || columnSearch(word, highlightColor)) {
 		spokenWords.push(word);
+		switch(playerNo){
+			case '1':scoreUpdate(++score1,score2); break;
+			case '2':scoreUpdate(score1,++score2);break;
+		}
 		return true;
 	}
 }
