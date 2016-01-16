@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/CodeCorp/Voizzle/issues"
   },
-  "homepage": "https://github.com/CodeCorp/Voizzle#readme"
+  "homepage": "https://github.com/CodeCorp/Voizzle#readme",
+  "devDependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.4.4"
+  }
 }
