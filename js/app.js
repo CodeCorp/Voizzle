@@ -13,6 +13,7 @@ PUZZLE_ROWS[9] = "1234567890";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
 var myHighlightColor;
+var spokenWords = [];
 
 function drawBoard(){
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
@@ -21,7 +22,6 @@ function drawBoard(){
 		};
 	};
 }
-
 
 function generateColumns(argument) {
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
@@ -34,8 +34,12 @@ function generateColumns(argument) {
 }
 
 function searchWord(word, highlightColor) {
-	if(word.length < MINIMUM_WORD_LENGTH) return; 
-	if(!rowSearch(word, highlightColor)) columnSearch(word, highlightColor);
+	if(spokenWords.indexOf(word) > -1) return false;
+	if(word.length < MINIMUM_WORD_LENGTH) return false; 
+	if(rowSearch(word, highlightColor) || columnSearch(word, highlightColor)) {
+		spokenWords.push(word);
+		return true;
+	}
 }
 
 
@@ -110,7 +114,8 @@ if ('webkitSpeechRecognition' in window) {
 			if (event.results[i].isFinal) {
 				finalTextMessage = event.results[i][0].transcript.toUpperCase().trim();				
 				socket.emit('spoken word', {'word': finalTextMessage,
-					'highlightColor': myHighlightColor
+					'highlightColor': myHighlightColor,
+					'inGrid': searchWord(finalTextMessage, myHighlightColor)
 					});
 				document.getElementById('voice-input').value = finalTextMessage;
 				interimText = '';

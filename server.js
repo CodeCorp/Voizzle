@@ -30,6 +30,7 @@ app.get(/\/(style|js)\/*/, function(req, res) {
 
 var playerCount = 1;
 var players = {};
+var words = [];
 
 io.on('connection', function(socket) {
 	var address = socket.request.connection.remoteAddress;
@@ -37,9 +38,13 @@ io.on('connection', function(socket) {
 		players[address] = playerCount++;
 		console.log('Player #' + players[address] + ' added with ip ' + address);
 	}
-	socket.emit('initial connection', {colorCode : players[address]});
+
+	socket.emit('initial connection', {'colorCode' : players[address], 'words': words});
 
 	socket.on('spoken word', function(data) {
-		io.emit('spoken word', data);
+		if(data.inGrid) {
+			words.push(data);
+			io.emit('spoken word', data);
+		}
 	});
 });
