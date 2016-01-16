@@ -44,7 +44,7 @@ function rowSearch(word) {
 		start_index = PUZZLE_ROWS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+i+"-"+(j+start_index)).css('background','yellow');
+				$("#"+i+"-"+(j+start_index)).addClass('highlighted');
 			};
 		break;
 		};
@@ -57,7 +57,7 @@ function columnSearch(word) {
 		start_index = PUZZLE_COLUMNS[i].indexOf(word);
 		if (start_index>-1) {
 			for (var j = 0; j < word.length; j++) {
-				$("#"+(j+start_index)+"-"+i).css('background','yellow');
+				$("#"+(j+start_index)+"-"+i).addClass('highlighted');
 			};
 		break;
 		};

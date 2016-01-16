@@ -8,7 +8,6 @@
 	
 }
 
-
 #puzzle-wrapper{
 	height: 402px; /*2px extra for border*/
 	width: 402px; /*2px extra for border*/
@@ -30,3 +29,17 @@
 	vertical-align: middle;
 	text-align: center;
 }
+
+.highlighted{
+	background-color: yellow;
+}
+
+#voice-input{
+	width: 200px;
+	height: 35px;
+}
+
+#input-wrapper{
+	margin-top: 20px; 
+}
+
