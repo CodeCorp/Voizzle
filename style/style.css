@@ -31,6 +31,7 @@
 	margin-top: 10px;
 	display: inline-block;
 	margin-left: 10px;
+	padding: 0 !important;
 }
 
 .score{
@@ -38,11 +39,12 @@
 	font-family: sans-serif;
 	text-align: center;
 	line-height: 30px;
-	margin-top: -1px;
+	position: relative;
+	top: 4px;
 }
 
 #score-1{
-	color: black;
+	color: white;
 }
 
 #score-2{
