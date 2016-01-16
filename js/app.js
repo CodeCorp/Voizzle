@@ -18,9 +18,54 @@ function drawBoard(){
 			$("#puzzle-wrapper").append("<div id='"+i+"-"+j+"' class='pixel'><p class='puzzle-char'>"+PUZZLE_ROWS[i][j]+"</p></div>");
 		};
 	};
-
 }
+
+
+function generateColumns(argument) {
+	for (var i = 0; i < PUZZLE_SIZE; i++) {
+		temp="";
+		for (var j = 0; j < PUZZLE_SIZE; j++) {
+			temp+=PUZZLE_ROWS[j][i];
+		};
+		PUZZLE_COLUMNS[i] = temp;
+	};
+}
+
+function searchWord(word) {
+	generateColumns();
+	rowSearch(word);
+	columnSearch(word);
+}
+
+
+function rowSearch(word) {
+	var start_index;
+	for (var i = 0; i < PUZZLE_SIZE; i++) {
+		start_index = PUZZLE_ROWS[i].indexOf(word);
+		if (start_index>-1) {
+			for (var j = 0; j < word.length; j++) {
+				$("#"+i+"-"+(j+start_index)).css('background','yellow');
+			};
+		break;
+		};
+	};	
+}
+
+function columnSearch(word) {
+	var start_index;
+	for (var i = 0; i < PUZZLE_SIZE; i++) {
+		start_index = PUZZLE_COLUMNS[i].indexOf(word);
+		if (start_index>-1) {
+			for (var j = 0; j < word.length; j++) {
+				$("#"+(j+start_index)+"-"+i).css('background','yellow');
+			};
+		break;
+		};
+	};	
+}
+
 
 $( document ).ready(function() {
 	drawBoard();
+	searchWord("1111");
 });
