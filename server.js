@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get(/\/(style|js)\/*/, function(req, res) {
+app.get(/\/(style|js|resources)\/*/, function(req, res) {
 	var fullURL = req.protocol + '://' + req.get('host') + req.originalUrl;
 	var parsedURL = url.parse(fullURL);
 	res.sendFile(__dirname + parsedURL.pathname);

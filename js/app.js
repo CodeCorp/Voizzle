@@ -125,6 +125,7 @@ if ('webkitSpeechRecognition' in window) {
 
 	recognition.onstart = function() {
 		isRecognizing = true;
+		$('#voice-input').css('background-position', '290px 0');
 	};
 
 	recognition.onerror = function(event) {
@@ -133,6 +134,7 @@ if ('webkitSpeechRecognition' in window) {
 
 	recognition.onend = function() {
 		isRecognizing = false;
+		$('#voice-input').css('background-position', '1290px 0');
 	};
 
 	recognition.onresult = function(event) {
