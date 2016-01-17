@@ -25,3 +25,7 @@ socket.on('new game', function(data) {
 	newGame(data.puzzleArray);
 	animateTimer(data.timer.height, data.timer.millis);
 });
+
+socket.on('stop current game', function(data) {
+	declareWinner();
+});

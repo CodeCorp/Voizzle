@@ -29,7 +29,8 @@ var players = {};
 var words = [];
 var currentPuzzle = puzzles.puzzle1;
 var curentGameTimeLeft;
-var maxTime = 100 * 1000;
+var maxTime = 10 * 1000;
+var lagAllowed = 300;
 
 function startNewGame(puzzleNumber) {
 	words = [];
@@ -42,6 +43,11 @@ function startNewGame(puzzleNumber) {
 			'millis': maxTime
 		}
 	});
+
+	var interval = setInterval(function() {
+		io.emit('stop current game', {});
+		clearInterval(interval);
+	}, maxTime + lagAllowed);
 }
 
 io.on('connection', function(socket) {

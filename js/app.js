@@ -94,16 +94,17 @@ function setCurrentPlayer(player){
 function declareWinner(){
 	var text = 'Green wins';
 	if (score1>score2) text = 'Yellow wins';
-	else if(score1==score2){text = 'Its a draw'}
-		$('#voice-input').val("");
+	else if(score1==score2) text = 'Its a draw';
+
+	$('#voice-input').val("");
 	$('#interim').val("---");
 	$('#voice-input').prop('disabled', true);
 	$('#mic').prop('disabled', true);
 	if (isRecognizing) {
 		toggleDictation();
 	}
-	alert(text+ " !!\nPress New Game to continue playing")
 
+	alert(text+ " !!\nPress New Game to continue playing");
 }
 
 // function startTimer(){
@@ -127,7 +128,7 @@ function declareWinner(){
 
 
 function animateTimer(height, millis) {
-	$('#timer').height(height + "%");
+	$('#timer').stop().height(height + "%");
 	$('#timer').animate({
 		'height': '0%'
 	}, millis, "linear");
