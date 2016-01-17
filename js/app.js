@@ -15,6 +15,7 @@ var MINIMUM_WORD_LENGTH = 3;
 var myHighlightColor;
 var spokenWords = [];
 var score1=0, score2=0;
+var TIME = 100;
 
 function setPuzzleRows(puzzleArray) {
 	PUZZLE_ROWS = puzzleArray;
@@ -115,6 +116,25 @@ function declareWinner(){
 	
 }
 
+function startTimer(){
+	
+	var heightDecreasedPerSec = 595/TIME;
+
+	var temp = setInterval(function(){
+		var presentHeight = $('#timer').height();
+		console.log(presentHeight);
+		if (presentHeight>10) {
+			$('#timer').height(presentHeight-heightDecreasedPerSec);
+		}
+		else{
+			$('#timer').height(0);
+			declareWinner();
+			clearInterval(temp);
+		}
+	},1000);
+	
+}
+
 function newGame(puzzleArray) {
 	scoreUpdate(0,0);
 	spokenWords = [];
@@ -127,6 +147,8 @@ function newGame(puzzleArray) {
 	generateColumns();
 	$('#voice-input').prop('disabled', false);
 	$('#mic').prop('disabled', false);
+	$('#timer').height(593);
+	startTimer();
 }
 
 $( document ).ready(function() {
