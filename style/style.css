@@ -78,12 +78,16 @@
 	text-align: center;
 }
 
+.highlight {
+	background-color: #e6e6e6;
+}
+
 .highlight-1{
 	background-color: #f0ad4e;
 }
 
 .highlight-2{
-	background-color: #5cb85c ;
+	background-color: #5cb85c;
 }
 
 #voice-input{

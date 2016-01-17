@@ -93,8 +93,16 @@ function setCurrentPlayer(player){
 
 function declareWinner(){
 	var text = 'Green wins';
-	if (score1>score2) text = 'Yellow wins';
-	else if(score1==score2) text = 'Its a draw';
+	var winnerClass = "highlight-2";
+
+	if (score1>score2) {
+		text = 'Yellow wins';
+		winnerClass = 'highlight-1';
+	}
+	else if(score1==score2) {
+		text = 'Its a draw';
+		winnerClass = "highlight";
+	}
 
 	$('#voice-input').val("");
 	$('#interim').val("---");
@@ -104,7 +112,9 @@ function declareWinner(){
 		toggleDictation();
 	}
 
-	alert(text+ " !!\nPress New Game to continue playing");
+	// alert(text+ " !!\nPress New Game to continue playing");
+	$('#timer').stop();
+	$('#timer-div').addClass(winnerClass);
 }
 
 // function startTimer(){
@@ -141,6 +151,7 @@ function newGame(puzzleArray) {
 	score2=0;
 	$("#puzzle-wrapper").html("");
 	$("#logs").html("");
+	$("#timer-div").removeClass();
 	setPuzzleRows(puzzleArray);
 	drawBoard();
 	generateColumns();
