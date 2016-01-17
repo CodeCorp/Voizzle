@@ -125,6 +125,14 @@ function declareWinner(){
 
 // }
 
+
+function animateTimer(height, millis) {
+	$('#timer').height(height + "%");
+	$('#timer').animate({
+		'height': '0%'
+	}, millis, "linear");
+}
+
 function newGame(puzzleArray) {
 	scoreUpdate(0,0);
 	spokenWords = [];
@@ -141,12 +149,6 @@ function newGame(puzzleArray) {
 	// startTimer();
 }
 
-function animateTimer(height, millis) {
-	$('#timer').height(height + "%");
-	$('#timer').animate({
-		'height': '0%'
-	}, millis, "linear");
-}
 
 $( document ).ready(function() {
 	// newGame();
