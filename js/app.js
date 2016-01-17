@@ -96,6 +96,21 @@ function setCurrentPlayer(player){
 		$('#score-wrapper-'+player).addClass('score-wrapper-highlight');
 }
 
+function declareWinner(){
+	var text = 'Green wins';
+	if (score1>score2){text = 'Yellow wins'}
+	else if(score1==score2){text = 'Its a draw'}
+	$('#voice-input').val("");
+	$('#interim').val("---");
+	$('#voice-input').prop('disabled', true);
+	$('#mic').prop('disabled', true);
+	if (isRecognizing) {
+		toggleDictation();
+	}
+	alert(text+ " !!\nPress New Game to continue playing")
+	
+}
+
 function newGame(argument) {
 	scoreUpdate(0,0);
 	spokenWords = [];
@@ -105,6 +120,8 @@ function newGame(argument) {
 	$("#logs").html("");
 	drawBoard();
 	generateColumns();
+	$('#voice-input').prop('disabled', false);
+	$('#mic').prop('disabled', false);
 }
 
 $( document ).ready(function() {
