@@ -5,6 +5,8 @@ socket.on('initial connection', function(data) {
 
 	newGame(data.puzzleArray);
 
+	animateTimer(data.timer.height, data.timer.millis);
+
 	data.words.forEach(function(currentWord) {
 		spokenWords.push(currentWord);
 		searchWord(currentWord.word, currentWord.highlightColor);
@@ -21,4 +23,5 @@ function socketNewGame(puzzleNumber) {
 
 socket.on('new game', function(data) {
 	newGame(data.puzzleArray);
+	animateTimer(data.timer.height, data.timer.millis);
 });

@@ -1,15 +1,5 @@
 var PUZZLE_SIZE = 10;
 var PUZZLE_ROWS = [];
-PUZZLE_ROWS[0] = "QWERTYIOPU";
-PUZZLE_ROWS[1] = "DUCKINGHEN";
-PUZZLE_ROWS[2] = "OPULKITEFA";
-PUZZLE_ROWS[3] = "GATELFGLAU";
-PUZZLE_ROWS[4] = "RNCDIHOLNG";
-PUZZLE_ROWS[5] = "OTJYOZWOMH";
-PUZZLE_ROWS[6] = "HKHINHLKOT";
-PUZZLE_ROWS[7] = "ALMYELLOWY";
-PUZZLE_ROWS[8] = "NNQPDEFSTI";
-PUZZLE_ROWS[9] = "BSLJDHUOSK";
 var PUZZLE_COLUMNS = [];
 var MINIMUM_WORD_LENGTH = 3;
 var myHighlightColor;
@@ -116,24 +106,24 @@ function declareWinner(){
 
 }
 
-function startTimer(){
+// function startTimer(){
 
-	var heightDecreasedPerSec = 595/TIME;
+// 	var heightDecreasedPerSec = 595/TIME;
 
-	var temp = setInterval(function(){
-		var presentHeight = $('#timer').height();
-		console.log(presentHeight);
-		if (presentHeight>10) {
-			$('#timer').height(presentHeight-heightDecreasedPerSec);
-		}
-		else{
-			$('#timer').height(0);
-			declareWinner();
-			clearInterval(temp);
-		}
-	},1000);
+// 	var temp = setInterval(function(){
+// 		var presentHeight = $('#timer').height();
+// 		console.log(presentHeight);
+// 		if (presentHeight>10) {
+// 			$('#timer').height(presentHeight-heightDecreasedPerSec);
+// 		}
+// 		else{
+// 			$('#timer').height(0);
+// 			declareWinner();
+// 			clearInterval(temp);
+// 		}
+// 	},1000);
 
-}
+// }
 
 function newGame(puzzleArray) {
 	scoreUpdate(0,0);
@@ -147,11 +137,16 @@ function newGame(puzzleArray) {
 	generateColumns();
 	$('#voice-input').prop('disabled', false);
 	$('#mic').prop('disabled', false);
-	$('#timer').height(593);
-	startTimer();
+	// $('#timer').height(593);
+	// startTimer();
 }
 
-
+function animateTimer(height, millis) {
+	$('#timer').height(height + "%");
+	$('#timer').animate({
+		'height': '0%'
+	}, millis, "linear");
+}
 
 $( document ).ready(function() {
 	// newGame();

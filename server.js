@@ -28,11 +28,20 @@ var playerCount = 1;
 var players = {};
 var words = [];
 var currentPuzzle = puzzles.puzzle1;
+var curentGameTimeLeft;
+var maxTime = 100 * 1000;
 
 function startNewGame(puzzleNumber) {
 	words = [];
 	currentPuzzle = puzzles.allPuzzles[puzzleNumber];
-	io.emit('new game', {puzzleArray: currentPuzzle});
+	curentGameStartTime = Date.now();
+	io.emit('new game', {
+		puzzleArray: currentPuzzle,
+		timer: {
+			'height': 100,
+			'millis': maxTime
+		}
+	});
 }
 
 io.on('connection', function(socket) {
@@ -42,7 +51,21 @@ io.on('connection', function(socket) {
 		console.log('Player #' + players[address] + ' added with ip ' + address);
 	}
 
-	socket.emit('initial connection', {'colorCode' : players[address], 'words': words, 'puzzleArray' : currentPuzzle});
+	socket.emit('initial connection', function() {
+		var timeLeft = curentGameStartTime + maxTime - Date.now();
+		if(timeLeft < 0) timeLeft = 0;
+		var height = timeLeft * 100 / maxTime;
+		return {
+			'colorCode' : players[address],
+			'words': words,
+			'puzzleArray': currentPuzzle,
+			'timer': {
+				'height': height,
+				'millis': timeLeft
+			}
+		}
+	}()
+	);
 
 	socket.on('spoken word', function(data) {
 		if(data.inGrid) {
@@ -64,7 +87,7 @@ io.on('connection', function(socket) {
 httpsServer.listen(4000, function() {
 	console.log('listening on *:4000');
 	// start a new game as soon as the server starts
-	startNewGame(1); 
+	startNewGame(0); 
 });
 
 io.listen(httpsServer);
