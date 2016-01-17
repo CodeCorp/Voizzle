@@ -29,9 +29,9 @@ var players = {};
 var words = [];
 var currentPuzzle = puzzles.puzzle1;
 
-function startNewGame() {
+function startNewGame(puzzleNumber) {
 	words = [];
-	currentPuzzle = puzzles.puzzle1;
+	currentPuzzle = puzzles.allPuzzles[puzzleNumber];
 	io.emit('new game', {puzzleArray: currentPuzzle});
 }
 
@@ -52,14 +52,19 @@ io.on('connection', function(socket) {
 	});
 
 	socket.on('new game', function(data) {
-		startNewGame();
+		if(data.puzzleNumber && data.puzzleNumber < puzzles.numberOfPuzzles) {
+			startNewGame(data.puzzleNumber);
+		} 
+		else {
+			startNewGame(0);
+		}
 	});
 });
 
 httpsServer.listen(4000, function() {
 	console.log('listening on *:4000');
 	// start a new game as soon as the server starts
-	startNewGame(); 
+	startNewGame(0); 
 });
 
 io.listen(httpsServer);
