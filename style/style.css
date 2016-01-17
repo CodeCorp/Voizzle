@@ -90,7 +90,7 @@
 #voice-input{
 	width: 325px;
 	height: 35px;
-	background: url('../resources/mic.gif') 1290px 0 no-repeat;
+	background: url('../resources/mic.png') 290px 0 no-repeat;
 	background-size: contain;
 	padding-right: 30px;
 	padding-left: 5px;
