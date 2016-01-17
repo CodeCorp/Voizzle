@@ -29,24 +29,28 @@ var players = {};
 var words = [];
 var currentPuzzle = puzzles.puzzle1;
 var curentGameTimeLeft;
-var maxTime = 10 * 1000;
+var maxTime = 60 * 1000;
 var lagAllowed = 300;
+var currentGameInterval;
 
 function startNewGame(puzzleNumber) {
 	words = [];
 	currentPuzzle = puzzles.allPuzzles[puzzleNumber];
-	curentGameStartTime = Date.now();
 	io.emit('new game', {
 		puzzleArray: currentPuzzle,
-		timer: {
-			'height': 100,
-			'millis': maxTime
-		}
+		timer: (function() {
+			curentGameStartTime = Date.now();
+			return {
+				'height': 100,
+				'millis': maxTime
+			};
+		})()
 	});
 
-	var interval = setInterval(function() {
+	clearInterval(currentGameInterval);
+	currentGameInterval = setInterval(function() {
 		io.emit('stop current game', {});
-		clearInterval(interval);
+		clearInterval(currentGameInterval);
 	}, maxTime + lagAllowed);
 }
 
@@ -57,7 +61,7 @@ io.on('connection', function(socket) {
 		console.log('Player #' + players[address] + ' added with ip ' + address);
 	}
 
-	socket.emit('initial connection', function() {
+	socket.emit('initial connection', (function() {
 		var timeLeft = curentGameStartTime + maxTime - Date.now();
 		if(timeLeft < 0) timeLeft = 0;
 		var height = timeLeft * 100 / maxTime;
@@ -70,7 +74,7 @@ io.on('connection', function(socket) {
 				'millis': timeLeft
 			}
 		}
-	}()
+	})()
 	);
 
 	socket.on('spoken word', function(data) {
