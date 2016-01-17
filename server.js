@@ -64,7 +64,7 @@ io.on('connection', function(socket) {
 httpsServer.listen(4000, function() {
 	console.log('listening on *:4000');
 	// start a new game as soon as the server starts
-	startNewGame(0); 
+	startNewGame(1); 
 });
 
 io.listen(httpsServer);

@@ -98,60 +98,60 @@ function setHighlightColor(playerNo){
 }
 
 function setCurrentPlayer(player){
-		$('#score-wrapper-'+player).addClass('score-wrapper-highlight');
+	$('#score-wrapper-'+player).addClass('score-wrapper-highlight');
 }
 
 function declareWinner(){
 	var text = 'Green wins';
 	if (score1>score2){text = 'Yellow wins'}
-	else if(score1==score2){text = 'Its a draw'}
-	$('#voice-input').val("");
-	$('#interim').val("---");
-	$('#voice-input').prop('disabled', true);
-	$('#mic').prop('disabled', true);
-	if (isRecognizing) {
-		toggleDictation();
+		else if(score1==score2){text = 'Its a draw'}
+			$('#voice-input').val("");
+		$('#interim').val("---");
+		$('#voice-input').prop('disabled', true);
+		$('#mic').prop('disabled', true);
+		if (isRecognizing) {
+			toggleDictation();
+		}
+		alert(text+ " !!\nPress New Game to continue playing")
+		
 	}
-	alert(text+ " !!\nPress New Game to continue playing")
-	
-}
 
-function startTimer(){
-	
-	var heightDecreasedPerSec = 595/TIME;
+	function startTimer(){
+		
+		var heightDecreasedPerSec = 595/TIME;
 
-	var temp = setInterval(function(){
-		var presentHeight = $('#timer').height();
-		console.log(presentHeight);
-		if (presentHeight>10) {
-			$('#timer').height(presentHeight-heightDecreasedPerSec);
-		}
-		else{
-			$('#timer').height(0);
-			declareWinner();
-			clearInterval(temp);
-		}
-	},1000);
-	
-}
+		var temp = setInterval(function(){
+			var presentHeight = $('#timer').height();
+			console.log(presentHeight);
+			if (presentHeight>10) {
+				$('#timer').height(presentHeight-heightDecreasedPerSec);
+			}
+			else{
+				$('#timer').height(0);
+				declareWinner();
+				clearInterval(temp);
+			}
+		},1000);
+		
+	}
 
-function newGame(puzzleArray) {
-	scoreUpdate(0,0);
-	spokenWords = [];
-	score1=0
-	score2=0;
-	$("#puzzle-wrapper").html("");
-	$("#logs").html("");
-	setPuzzleRows(puzzleArray);
-	drawBoard();
-	generateColumns();
-	$('#voice-input').prop('disabled', false);
-	$('#mic').prop('disabled', false);
-	$('#timer').height(593);
-	startTimer();
-}
+	function newGame(puzzleArray) {
+		scoreUpdate(0,0);
+		spokenWords = [];
+		score1=0
+		score2=0;
+		$("#puzzle-wrapper").html("");
+		$("#logs").html("");
+		setPuzzleRows(puzzleArray);
+		drawBoard();
+		generateColumns();
+		$('#voice-input').prop('disabled', false);
+		$('#mic').prop('disabled', false);
+		$('#timer').height(593);
+		startTimer();
+	}
 
-$( document ).ready(function() {
+	$( document ).ready(function() {
 	// newGame();
 });
 
@@ -184,12 +184,14 @@ if ('webkitSpeechRecognition' in window) {
 		var interimText = '';
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 			if (event.results[i].isFinal) {
-				finalTextMessage = event.results[i][0].transcript.toUpperCase().trim();				
-				socket.emit('spoken word', {'word': finalTextMessage,
-					'highlightColor': myHighlightColor,
-					'inGrid': searchWord(finalTextMessage, myHighlightColor)
+				event.results[i][0].transcript.toUpperCase().trim().split(' ').forEach(function(currentWord) {
+					finalTextMessage = currentWord;
+					socket.emit('spoken word', {'word': finalTextMessage,
+						'highlightColor': myHighlightColor,
+						'inGrid': searchWord(finalTextMessage, myHighlightColor)
 					});
-				document.getElementById('voice-input').value = finalTextMessage;
+					document.getElementById('voice-input').value = finalTextMessage;
+				});
 				interimText = '';
 			} else {
 				interimText = event.results[i][0].transcript;
