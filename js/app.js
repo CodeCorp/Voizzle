@@ -6,6 +6,7 @@ var myHighlightColor;
 var spokenWords = [];
 var score1=0, score2=0;
 var TIME = 100;
+var gameOver;
 
 function setPuzzleRows(puzzleArray) {
 	PUZZLE_ROWS = puzzleArray;
@@ -32,6 +33,7 @@ function generateColumns(argument) {
 }
 
 function searchWord(word, highlightColor) {
+	if(gameOver) return false;
 	var playerNo = highlightColor[highlightColor.length-1];
 	var newLogButton = $("<button type='button' class='btn log-button'>"+word+"</button>");
 	if(spokenWords.indexOf(word) > -1) return false;
@@ -92,15 +94,19 @@ function setCurrentPlayer(player){
 }
 
 function declareWinner(){
-	var text = 'Green wins';
+	gameOver = true;
+
+	var text1 = 'GREEN'
+	var text2 = 'WINS!';
 	var winnerClass = "highlight-2";
 
 	if (score1>score2) {
-		text = 'Yellow wins';
+		text1 = 'YELLOW';
 		winnerClass = 'highlight-1';
 	}
 	else if(score1==score2) {
-		text = 'Its a draw';
+		text1 = "IT'S A";
+		text2 = "DRAW!"
 		winnerClass = "highlight";
 	}
 
@@ -111,10 +117,12 @@ function declareWinner(){
 	if (isRecognizing) {
 		toggleDictation();
 	}
-
+	$('#winner-declaration #line-1').html(text1);
+	$('#winner-declaration #line-2').html(text2);
 	// alert(text+ " !!\nPress New Game to continue playing");
 	$('#timer').stop();
 	$('#timer-div').addClass(winnerClass);
+	$('#winner-declaration').show();
 }
 
 // function startTimer(){
@@ -157,6 +165,8 @@ function newGame(puzzleArray) {
 	generateColumns();
 	$('#voice-input').prop('disabled', false);
 	$('#mic').prop('disabled', false);
+	$('#winner-declaration').hide();
+	gameOver=false;
 	// $('#timer').height(593);
 	// startTimer();
 }
@@ -198,7 +208,7 @@ if ('webkitSpeechRecognition' in window) {
 	recognition.onresult = function(event) {
 		var interimText = '';
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
-			if (event.results[i].isFinal) {
+			if (event.results[i].isFinal && !gameOver) {
 				event.results[i][0].transcript.toUpperCase().trim().split(' ').forEach(function(currentWord) {
 					finalTextMessage = currentWord;
 					socket.emit('spoken word', {'word': finalTextMessage,

@@ -155,6 +155,23 @@
 	text-align: center;
 }
 
+#winner-declaration #line-1{
+	padding-top: 260px;
+}
+
+#press-new-game{
+	text-align: center;
+	font-size: 14px;
+	font-style: sans-serif;
+}
+
+.winner-text{
+	text-align: center;
+	font-size: 18px;
+	font-style: sans-serif;
+	font-weight: 700;
+}
+
 #timer-wrapper{
 	margin-left: 20px; 
 	height: 652px;
