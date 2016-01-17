@@ -16,6 +16,10 @@ var myHighlightColor;
 var spokenWords = [];
 var score1=0, score2=0;
 
+function setPuzzleRows(puzzleArray) {
+	PUZZLE_ROWS = puzzleArray;
+};
+
 function drawBoard(){
 	for (var i = 0; i < PUZZLE_SIZE; i++) {
 		for (var j = 0; j < PUZZLE_SIZE; j++) {
@@ -111,13 +115,14 @@ function declareWinner(){
 	
 }
 
-function newGame(argument) {
+function newGame(puzzleArray) {
 	scoreUpdate(0,0);
 	spokenWords = [];
 	score1=0
 	score2=0;
 	$("#puzzle-wrapper").html("");
 	$("#logs").html("");
+	setPuzzleRows(puzzleArray);
 	drawBoard();
 	generateColumns();
 	$('#voice-input').prop('disabled', false);
@@ -125,8 +130,7 @@ function newGame(argument) {
 }
 
 $( document ).ready(function() {
-	newGame();
-
+	// newGame();
 });
 
 //--------------------------------------------------------
