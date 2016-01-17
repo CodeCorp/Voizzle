@@ -15,8 +15,8 @@ socket.on('spoken word', function(data) {
 	searchWord(data.word, data.highlightColor);
 });
 
-function socketNewGame() {
-	socket.emit('new game', {});
+function socketNewGame(puzzleNumber) {
+	socket.emit('new game', {'puzzleNumber': puzzleNumber});
 }
 
 socket.on('new game', function(data) {

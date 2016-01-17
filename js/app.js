@@ -103,56 +103,62 @@ function setCurrentPlayer(player){
 
 function declareWinner(){
 	var text = 'Green wins';
-	if (score1>score2){text = 'Yellow wins'}
-		else if(score1==score2){text = 'Its a draw'}
-			$('#voice-input').val("");
-		$('#interim').val("---");
-		$('#voice-input').prop('disabled', true);
-		$('#mic').prop('disabled', true);
-		if (isRecognizing) {
-			toggleDictation();
+	if (score1>score2) text = 'Yellow wins';
+	else if(score1==score2){text = 'Its a draw'}
+		$('#voice-input').val("");
+	$('#interim').val("---");
+	$('#voice-input').prop('disabled', true);
+	$('#mic').prop('disabled', true);
+	if (isRecognizing) {
+		toggleDictation();
+	}
+	alert(text+ " !!\nPress New Game to continue playing")
+
+}
+
+function startTimer(){
+
+	var heightDecreasedPerSec = 595/TIME;
+
+	var temp = setInterval(function(){
+		var presentHeight = $('#timer').height();
+		console.log(presentHeight);
+		if (presentHeight>10) {
+			$('#timer').height(presentHeight-heightDecreasedPerSec);
 		}
-		alert(text+ " !!\nPress New Game to continue playing")
-		
-	}
+		else{
+			$('#timer').height(0);
+			declareWinner();
+			clearInterval(temp);
+		}
+	},1000);
 
-	function startTimer(){
-		
-		var heightDecreasedPerSec = 595/TIME;
+}
 
-		var temp = setInterval(function(){
-			var presentHeight = $('#timer').height();
-			console.log(presentHeight);
-			if (presentHeight>10) {
-				$('#timer').height(presentHeight-heightDecreasedPerSec);
-			}
-			else{
-				$('#timer').height(0);
-				declareWinner();
-				clearInterval(temp);
-			}
-		},1000);
-		
-	}
+function newGame(puzzleArray) {
+	scoreUpdate(0,0);
+	spokenWords = [];
+	score1=0
+	score2=0;
+	$("#puzzle-wrapper").html("");
+	$("#logs").html("");
+	setPuzzleRows(puzzleArray);
+	drawBoard();
+	generateColumns();
+	$('#voice-input').prop('disabled', false);
+	$('#mic').prop('disabled', false);
+	$('#timer').height(593);
+	startTimer();
+}
 
-	function newGame(puzzleArray) {
-		scoreUpdate(0,0);
-		spokenWords = [];
-		score1=0
-		score2=0;
-		$("#puzzle-wrapper").html("");
-		$("#logs").html("");
-		setPuzzleRows(puzzleArray);
-		drawBoard();
-		generateColumns();
-		$('#voice-input').prop('disabled', false);
-		$('#mic').prop('disabled', false);
-		$('#timer').height(593);
-		startTimer();
-	}
 
-	$( document ).ready(function() {
+
+$( document ).ready(function() {
 	// newGame();
+	$('#new-game-btn').on('click', function() {
+		var puzzleNumber = Number($('#game-no').val());
+		socketNewGame(puzzleNumber);
+	});
 });
 
 //--------------------------------------------------------
