@@ -1,4 +1,4 @@
-# Voizzle : The Voice Enabled Word Puzzle 
+# Voizzle : A Voice Enabled Multiplayer Word Puzzle 
 
 [![game version](https://img.shields.io/badge/version-1.0-red.svg)](https://img.shields.io/badge/version-1.0-red.svg)
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
@@ -33,6 +33,8 @@ The clients are randomly alloted a color (yellow/green) and the alloted color is
 The game begins after you press the New Game button and the timer in the right side starts. Speak a word while the app is listening and watch it get highlighted in the puzzle with the colour alloted to you while your opponents words are highlighted with a different colour. 
 
 The aim is to find maximum number of words before the timer ends.
+
+**_Note: The game is presently configured to support 2 players but the limit can be increased quite easily._**
 
 **Cheat:**
 If your word is not getting recognised because of the pronunciation, you can speak phrase containing that word.
