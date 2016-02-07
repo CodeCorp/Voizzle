@@ -7,6 +7,9 @@ var spokenWords = [];
 var score1=0, score2=0;
 var TIME = 100;
 var gameOver;
+var audioGameOver = new Audio('../resources/game-over.wav');
+var audioPlayer1Scores = new Audio('../resources/player1-scores.wav');
+var audioPlayer2Scores = new Audio('../resources/player2-scores.wav');
 
 function setPuzzleRows(puzzleArray) {
 	PUZZLE_ROWS = puzzleArray;
@@ -41,8 +44,8 @@ function searchWord(word, highlightColor) {
 	if(rowSearch(word, highlightColor) || columnSearch(word, highlightColor)) {
 		spokenWords.push(word);
 		switch(playerNo){
-			case '1':scoreUpdate(++score1,score2); break;
-			case '2':scoreUpdate(score1,++score2);break;
+			case '1':scoreUpdate(++score1,score2); audioPlayer1Scores.play(); break;
+			case '2':scoreUpdate(score1,++score2); audioPlayer2Scores.play(); break;
 		}
 
 		$('#logs').append(newLogButton.addClass(highlightColor));
@@ -96,6 +99,8 @@ function setCurrentPlayer(player){
 function declareWinner(){
 	gameOver = true;
 
+	audioGameOver.play();
+	
 	var text1 = 'GREEN'
 	var text2 = 'WINS!';
 	var winnerClass = "highlight-2";

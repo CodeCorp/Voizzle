@@ -14,6 +14,8 @@ _For people who enjoy playing word puzzles but are too lazy to move their hands 
 
 Also, the clients need to play the game in **Google Chrome Browser**. We do not support any other browsers at the moment.
 
+The Game is best viewed on full screen. (Press F11 for toggling full screen)
+
 ##Installation
 
 ```bash
