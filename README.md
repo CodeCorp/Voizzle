@@ -1,12 +1,14 @@
 # Voizzle : A Voice Enabled Multiplayer Word Puzzle 
 
-[![game version](https://img.shields.io/badge/version-1.0-red.svg)](https://img.shields.io/badge/version-1.0-red.svg)
+[![game version](https://img.shields.io/badge/version-1.1-red.svg)](https://img.shields.io/badge/version-1.0-red.svg)
 [![npm version](https://badge.fury.io/js/npm.svg)](https://badge.fury.io/js/npm)
 
 _For people who enjoy playing word puzzles but are too lazy to move their hands to mark the words._
 
 
 ![Screenshot](http://oi63.tinypic.com/2ajwadg.jpg "Screenshot during game play")
+
+**Watch the video demonstration at https://youtu.be/pgmWMjx2ReY**
 
 ##Requirements
 - npm (latest)
@@ -41,7 +43,6 @@ The aim is to find maximum number of words before the timer ends.
 **Cheat:**
 If your word is not getting recognised because of the pronunciation, you can speak phrase containing that word.
 *For example, if you speak 'ate' the game may recognise it as '8' or 'eight', so instead try speaking a phrase like "I 'ate' an apple".Hence the app will search for all the words in the phrase namely 'I','ate','an','apple' which includes the required word 'ate'.*
-
 
 
 
