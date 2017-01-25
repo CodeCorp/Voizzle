@@ -26,6 +26,7 @@ cd Voizzle
 npm install
 node server.js
 ```
+The game would be running on ```https``` and not on ```http```.
 
 ##Game Play
 To start a new game press New Game button after entering the puzzle number in the text field beside the New Game button.
